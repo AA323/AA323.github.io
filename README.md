@@ -1,1 +1,853 @@
-# AA323.github.io
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SproutSpace — Household-Scale Food Production</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --soil: #2C1F14;
+    --bark: #4A3728;
+    --moss: #5C6B3A;
+    --sage: #8A9B6E;
+    --lichen: #B8C4A0;
+    --cream: #F4EFE4;
+    --parchment: #EDE5D4;
+    --duckweed: #7B9E4E;
+    --watermeal: #A8C070;
+    --accent: #C4834A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--soil);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* Organic texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(244, 239, 228, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(44, 31, 20, 0.08);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--soil);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span {
+    color: var(--duckweed);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--bark);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--duckweed); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 3rem 5rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--duckweed);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+    line-height: 1.15;
+    color: var(--soil);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 em {
+    color: var(--duckweed);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--bark);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .btn-primary {
+    background: var(--moss);
+    color: var(--cream);
+    padding: 0.9rem 2rem;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+    border-radius: 2px;
+  }
+
+  .btn-primary:hover {
+    background: var(--soil);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--bark);
+    padding: 0.9rem 2rem;
+    border: 1.5px solid var(--bark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    border-radius: 2px;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--duckweed);
+    color: var(--duckweed);
+    transform: translateY(-2px);
+  }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-illustration {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(123,158,78,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 30% 70%, rgba(168,192,112,0.12) 0%, transparent 50%),
+      linear-gradient(135deg, var(--parchment) 0%, var(--lichen) 100%);
+  }
+
+  .floating-orb {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    animation: floatIn 1.2s ease forwards;
+  }
+
+  .orb-1 {
+    width: 280px; height: 280px;
+    background: radial-gradient(circle at 40% 35%, rgba(168,192,112,0.6), rgba(92,107,58,0.3));
+    top: 15%; left: 10%;
+    animation-delay: 0.5s;
+  }
+
+  .orb-2 {
+    width: 180px; height: 180px;
+    background: radial-gradient(circle at 40% 35%, rgba(196,131,74,0.4), rgba(123,158,78,0.2));
+    bottom: 20%; right: 15%;
+    animation-delay: 0.8s;
+  }
+
+  .orb-3 {
+    width: 120px; height: 120px;
+    background: radial-gradient(circle at 40% 35%, rgba(184,196,160,0.7), rgba(138,155,110,0.3));
+    top: 55%; left: 35%;
+    animation-delay: 1s;
+  }
+
+  .hero-tagline {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--bark);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.2s;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 6rem 5rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--duckweed);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    line-height: 1.2;
+    color: var(--soil);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--bark);
+    max-width: 640px;
+  }
+
+  /* WHAT WE DO */
+  .what {
+    background: var(--parchment);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .what-left {}
+
+  .what-right {
+    padding-top: 1rem;
+  }
+
+  .track-card {
+    background: var(--cream);
+    border: 1px solid rgba(44,31,20,0.1);
+    border-radius: 4px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .track-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(44,31,20,0.08);
+  }
+
+  .track-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--duckweed);
+  }
+
+  .track-card.mushroom::before {
+    background: var(--accent);
+  }
+
+  .track-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--soil);
+    margin-bottom: 0.75rem;
+  }
+
+  .track-body {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--bark);
+  }
+
+  .track-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    background: var(--parchment);
+    color: var(--bark);
+    border: 1px solid rgba(44,31,20,0.12);
+  }
+
+  /* PHILOSOPHY */
+  .philosophy {
+    background: var(--soil);
+    color: var(--cream);
+    text-align: center;
+    padding: 7rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .philosophy::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(123,158,78,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(196,131,74,0.1) 0%, transparent 50%);
+  }
+
+  .philosophy .section-label {
+    color: var(--lichen);
+  }
+
+  .philosophy .section-title {
+    color: var(--cream);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+  }
+
+  .philosophy .section-body {
+    color: var(--lichen);
+    margin: 0 auto 3rem;
+    max-width: 580px;
+  }
+
+  .philosophy-stats {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--watermeal);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--lichen);
+    max-width: 120px;
+    line-height: 1.5;
+  }
+
+  /* STORY */
+  .story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    background: var(--cream);
+  }
+
+  .story-visual {
+    position: relative;
+    height: 420px;
+  }
+
+  .story-block {
+    position: absolute;
+    border-radius: 4px;
+  }
+
+  .story-block-1 {
+    width: 75%;
+    height: 75%;
+    top: 0; left: 0;
+    background: linear-gradient(135deg, var(--moss), var(--duckweed));
+    opacity: 0.85;
+  }
+
+  .story-block-2 {
+    width: 55%;
+    height: 55%;
+    bottom: 0; right: 0;
+    background: linear-gradient(135deg, var(--parchment), var(--lichen));
+    border: 1px solid rgba(44,31,20,0.1);
+  }
+
+  .story-quote {
+    position: absolute;
+    bottom: 2rem;
+    left: 1.5rem;
+    right: 4rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--cream);
+    line-height: 1.6;
+    z-index: 2;
+  }
+
+  /* SIGNUP */
+  .signup {
+    background: var(--parchment);
+    text-align: center;
+    padding: 7rem 5rem;
+  }
+
+  .signup .section-title {
+    max-width: 560px;
+    margin: 0 auto 1rem;
+  }
+
+  .signup .section-body {
+    margin: 0 auto 2.5rem;
+    max-width: 480px;
+  }
+
+  .signup-form {
+    display: flex;
+    gap: 0;
+    max-width: 460px;
+    margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(44,31,20,0.1);
+  }
+
+  .signup-form input {
+    flex: 1;
+    padding: 1rem 1.2rem;
+    border: 1.5px solid rgba(44,31,20,0.15);
+    border-right: none;
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--soil);
+    outline: none;
+    border-radius: 2px 0 0 2px;
+  }
+
+  .signup-form input::placeholder {
+    color: rgba(44,31,20,0.35);
+  }
+
+  .signup-form input:focus {
+    border-color: var(--duckweed);
+  }
+
+  .signup-form button {
+    padding: 1rem 1.8rem;
+    background: var(--moss);
+    color: var(--cream);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 0 2px 2px 0;
+    white-space: nowrap;
+  }
+
+  .signup-form button:hover {
+    background: var(--soil);
+  }
+
+  .signup-note {
+    font-size: 0.78rem;
+    color: var(--sage);
+    margin-top: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--bark);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 5rem;
+  }
+
+  .contact .section-label { color: var(--lichen); }
+  .contact .section-title { color: var(--cream); }
+  .contact .section-body { color: var(--lichen); }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--lichen);
+    font-size: 0.92rem;
+    transition: color 0.2s;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(244,239,228,0.1);
+  }
+
+  .contact-link:hover { color: var(--watermeal); }
+
+  .contact-link-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(244,239,228,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .contact-right {
+    background: rgba(244,239,228,0.05);
+    border: 1px solid rgba(244,239,228,0.1);
+    border-radius: 4px;
+    padding: 2.5rem;
+  }
+
+  .contact-right h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .contact-right p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--lichen);
+    margin-bottom: 1.5rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--soil);
+    padding: 2rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(244,239,228,0.08);
+  }
+
+  footer .nav-logo { color: var(--cream); }
+
+  .footer-note {
+    font-size: 0.78rem;
+    color: rgba(244,239,228,0.35);
+    letter-spacing: 0.04em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes floatIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { height: 300px; }
+    .hero-left { padding: 6rem 2rem 3rem; }
+    section { padding: 4rem 2rem; }
+    .what, .story, .contact { grid-template-columns: 1fr; gap: 2.5rem; }
+    .philosophy-stats { gap: 2rem; flex-wrap: wrap; }
+    nav ul { display: none; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .signup-form { flex-direction: column; }
+    .signup-form input { border-right: 1.5px solid rgba(44,31,20,0.15); border-bottom: none; border-radius: 2px 2px 0 0; }
+    .signup-form button { border-radius: 0 0 2px 2px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Sprout<span>Space</span></a>
+  <ul>
+    <li><a href="#what">What We Grow</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#signup">Workshops</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Applied Research & Education · Twin Cities, MN</p>
+    <h1>Grow <em>extraordinary</em> food anywhere there is light and water.</h1>
+    <p class="hero-sub">SproutSpace teaches household-scale cultivation of aquatic superfoods and gourmet mushrooms — no soil, no subscriptions, no backyard required.</p>
+    <div class="hero-cta">
+      <a href="#signup" class="btn-primary">Join the Workshop List</a>
+      <a href="#what" class="btn-secondary">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-illustration"></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+    <p class="hero-tagline">Food was something you grew,<br>understood, and shared.</p>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what" id="what">
+  <div class="what-left reveal">
+    <p class="section-label">What We Grow</p>
+    <h2 class="section-title">Two workshop tracks. One philosophy.</h2>
+    <p class="section-body">Wolffia globosa — the smallest flowering plant on earth — contains more protein per gram than soybeans. Lemna minor is studied by NASA for life support applications. Oyster mushrooms are among the most accessible, high-yield crops available to independent producers. All three remain almost entirely unknown to American home growers. SproutSpace is changing that.</p>
+    <br>
+    <p class="section-body">Every system we teach is low-dependency by design: no pumps, no proprietary nutrients, no subscription inputs. Complexity is only added where it demonstrably improves outcomes.</p>
+  </div>
+  <div class="what-right reveal">
+    <div class="track-card">
+      <h3 class="track-title">Aquatic Cultivation</h3>
+      <p class="track-body">Simple water-based growing systems for Wolffia and Lemna. Nutrient solutions derived from composting — closing the loop conventional hydroponic systems leave open. Participants leave with a living system, care guide, and the knowledge to teach their neighbor.</p>
+      <div class="track-tags">
+        <span class="tag">No pumps</span>
+        <span class="tag">No mined nutrients</span>
+        <span class="tag">Windowsill-ready</span>
+      </div>
+    </div>
+    <div class="track-card mushroom">
+      <h3 class="track-title">Mushroom Cultivation</h3>
+      <p class="track-body">Hands-on workshops covering spawn culturing, building a 3-gallon grow bucket to take home, substrate management, sun-charging for Vitamin D2, drying, and preparation. Participants leave with a living grow system, a care guide, and a small recipe book.</p>
+      <div class="track-tags">
+        <span class="tag">Culture your own spawn</span>
+        <span class="tag">Take home system</span>
+        <span class="tag">Recipe book included</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY STATS -->
+<section class="philosophy">
+  <div style="position:relative;z-index:1;">
+    <p class="section-label">Why It Matters</p>
+    <h2 class="section-title reveal">Food security should not require acreage, wealth, or specialized credentials.</h2>
+    <p class="section-body reveal">Nearly 40 million Americans live more than a mile from a grocery store. Over 102 million Americans rent their homes. 72% of people who aren't growing food cite lack of space as the only reason why. SproutSpace is built for them.</p>
+    <div class="philosophy-stats reveal">
+      <div class="stat">
+        <span class="stat-number">102M</span>
+        <span class="stat-label">Americans who rent their homes</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">72%</span>
+        <span class="stat-label">of non-growers cite space as the barrier</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">40M</span>
+        <span class="stat-label">Americans more than 1 mile from a grocery store</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">$0</span>
+        <span class="stat-label">minimum to get started with open-source guides</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-visual reveal">
+    <div class="story-block story-block-1"></div>
+    <div class="story-block story-block-2"></div>
+    <p class="story-quote">"I had spent years optimizing industrial food systems from the inside. I began asking a different question."</p>
+  </div>
+  <div class="reveal">
+    <p class="section-label">Our Story</p>
+    <h2 class="section-title">Built by an engineer. Grounded in care.</h2>
+    <p class="section-body">SproutSpace grew from a personal reckoning. After leaving a decade-long career in software and agricultural technology — including work with Cargill, one of the world's largest food supply companies — our founder left to care for a family member through injury and cancer treatment.</p>
+    <br>
+    <p class="section-body">That experience made abstract systems personal. The question wasn't how to optimize the supply chain. It was what meaningful nutrition could look like inside the spatial and financial constraints of an ordinary home, without depending on that chain at all.</p>
+    <br>
+    <p class="section-body">The answer was a category of crops largely overlooked by large-scale agriculture, combined with methods simple enough to learn in an afternoon and teach your neighbor the following week.</p>
+    <br>
+    <a href="#signup" class="btn-primary">Join Our First Workshops</a>
+  </div>
+</section>
+
+<!-- SIGNUP -->
+<section class="signup" id="signup">
+  <p class="section-label reveal">Workshops · Twin Cities, MN</p>
+  <h2 class="section-title reveal">Be the first to know.</h2>
+  <p class="section-body reveal">SproutSpace is launching 20 pilot workshops in the Twin Cities beginning in 2025 — twice monthly, 10–20 participants each. Join the list to be notified when registration opens.</p>
+  <div class="signup-form reveal">
+    <input type="email" placeholder="your@email.com" />
+    <button type="submit">Notify Me</button>
+  </div>
+  <p class="signup-note reveal">No spam. Just workshops, open-source guides, and the occasional duckweed update.</p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Let's talk about what grows.</h2>
+    <p class="section-body">Whether you're interested in workshops, institutional programming, school and library partnerships, or just want to know more about the world's smallest flowering plant — we'd love to hear from you.</p>
+    <div class="contact-links">
+      <a href="mailto:hello@sproutspace.com" class="contact-link">
+        <span class="contact-link-icon">✉</span>
+        hello@sproutspace.com
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-icon">📍</span>
+        Twin Cities, Minnesota
+      </a>
+      <a href="#" class="contact-link">
+        <span class="contact-link-icon">🌱</span>
+        Institutional & School Partnerships Welcome
+      </a>
+    </div>
+  </div>
+  <div class="contact-right reveal">
+    <h3>Interested in hosting a workshop?</h3>
+    <p>SproutSpace works with schools, libraries, sustainability organizations, and community groups to bring hands-on cultivation education directly to your community. Programming is designed to be engaging, science-based, and accessible to all ages.</p>
+    <a href="mailto:hello@sproutspace.com" class="btn-primary">Start the Conversation</a>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="nav-logo">Sprout<span style="color:var(--duckweed)">Space</span></a>
+  <p class="footer-note">Applied Research & Education in Household-Scale Food Production · Twin Cities, MN</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Smooth email signup feedback
+  document.querySelector('.signup-form button').addEventListener('click', function() {
+    const input = document.querySelector('.signup-form input');
+    if (input.value && input.value.includes('@')) {
+      this.textContent = 'You\'re on the list ✓';
+      this.style.background = 'var(--duckweed)';
+      input.value = '';
+      input.placeholder = 'Thanks for signing up!';
+    } else {
+      input.style.borderColor = 'var(--accent)';
+      setTimeout(() => input.style.borderColor = '', 1000);
+    }
+  });
+</script>
+
+</body>
+</html>
