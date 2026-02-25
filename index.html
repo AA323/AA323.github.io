@@ -833,6 +833,17 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  document.querySelector('.signup-form').addEventListener('submit', function() {
+    const button = document.querySelector('.signup-form button');
+    const input = document.querySelector('.signup-form input[type="email"]');
+    setTimeout(function() {
+      button.textContent = 'You\'re on the list ✓';
+      button.style.background = 'var(--duckweed)';
+      input.value = '';
+      input.placeholder = 'Thanks for signing up!';
+    }, 500);
+  });
 </script>
 </body>
 </html>
