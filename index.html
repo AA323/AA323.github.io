@@ -852,15 +852,31 @@
     }
   });
 </script>
-  <script>
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Email signup feedback
   document.querySelector('.signup-form form').addEventListener('submit', function(e) {
-    var input = document.getElementById('email-input');
-    var error = document.getElementById('email-error');
-    if (!input.value || !input.value.includes('@')) {
-      e.preventDefault();
-      error.style.display = 'block';
+    const input = document.querySelector('.signup-form input');
+    const button = document.querySelector('.signup-form button');
+    if (input.value && input.value.includes('@')) {
+      button.textContent = 'You\'re on the list ✓';
+      button.style.background = 'var(--duckweed)';
+      input.value = '';
+      input.placeholder = 'Thanks for signing up!';
     } else {
-      error.style.display = 'none';
+      e.preventDefault();
+      input.style.borderColor = 'var(--accent)';
+      setTimeout(() => input.style.borderColor = '', 1000);
     }
   });
 </script>
