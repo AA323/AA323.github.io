@@ -783,8 +783,12 @@
   <h2 class="section-title reveal">Be the first to know.</h2>
   <p class="section-body reveal">SproutSpace is launching 20 pilot workshops in the Twin Cities beginning in 2025 — twice monthly, 10–20 participants each. Join the list to be notified when registration opens.</p>
   <div class="signup-form reveal">
-    <input type="email" placeholder="your@email.com" />
-    <button type="submit">Notify Me</button>
+    <form action="https://assets.mailerlite.com/jsonp/2141099/forms/180345020960736917/subscribe" method="post" target="_blank">
+      <input type="email" name="fields[email]" placeholder="your@email.com" required />
+      <input type="hidden" name="ml-submit" value="1">
+      <input type="hidden" name="anticsrf" value="true">
+      <button type="submit">Notify Me</button>
+    </form>
   </div>
   <p class="signup-note reveal">No spam. Just workshops, open-source guides, and the occasional duckweed update.</p>
 </section>
@@ -848,6 +852,6 @@
     }
   });
 </script>
-
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v95037e5bac78f29ed026832ca21a7c7b" type="text/javascript"></script>
 </body>
 </html>
