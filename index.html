@@ -825,7 +825,6 @@
 </footer>
 
 <script>
-  // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -833,22 +832,7 @@
       }
     });
   }, { threshold: 0.12 });
-
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Smooth email signup feedback
-  document.querySelector('.signup-form button').addEventListener('click', function() {
-    const input = document.querySelector('.signup-form input');
-    if (input.value && input.value.includes('@')) {
-      this.textContent = 'You\'re on the list ✓';
-      this.style.background = 'var(--duckweed)';
-      input.value = '';
-      input.placeholder = 'Thanks for signing up!';
-    } else {
-      input.style.borderColor = 'var(--accent)';
-      setTimeout(() => input.style.borderColor = '', 1000);
-    }
-  });
 </script>
 </body>
 </html>
