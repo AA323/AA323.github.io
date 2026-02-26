@@ -3,10 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="SproutSpace teaches household-scale cultivation of mushrooms, Lemna, and Wolffia through hands-on workshops in the Twin Cities, MN. No soil, no experience needed.">
+<meta name="description" content="SproutSpace offers hands-on workshops in oyster mushroom and aquatic plant cultivation in the Twin Cities, MN. Grow Wolffia, Lemna, and gourmet mushrooms at home — no soil, no experience, no subscriptions needed.">
 <meta name="robots" content="index, follow">
-<meta name="keywords" content="wolffia, lemna, duckweed, oyster mushroom cultivation, household food production, aquatic plants, Twin Cities workshops, sproutspace">
-<title>SproutSpace — Household-Scale Food Production</title>
+<meta name="keywords" content="wolffia globosa, lemna minor, duckweed growing, watermeal cultivation, oyster mushroom workshop, household food production, aquatic plant growing, Twin Cities food education, Minneapolis workshops, sproutspace, food sovereignty, windowsill growing, bokashi composting">
+<meta property="og:title" content="SproutSpace — Household-Scale Food Production Workshops">
+<meta property="og:description" content="Hands-on workshops in oyster mushroom and aquatic plant cultivation. Twin Cities, MN. No soil, no experience, no subscriptions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sproutspace.org">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SproutSpace — Household-Scale Food Production">
+<meta name="twitter:description" content="Grow extraordinary food anywhere there is light and water. Workshops in the Twin Cities, MN.">
+<link rel="canonical" href="https://sproutspace.org">
+<title>SproutSpace — Household-Scale Food Production Workshops | Twin Cities, MN</title>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "SproutSpace",
+  "description": "Applied research and education in household-scale food production. Hands-on workshops in oyster mushroom cultivation and aquatic plant growing in the Twin Cities, MN.",
+  "url": "https://sproutspace.org",
+  "email": "alexandra@sproutspace.org",
+  "areaServed": { "@type": "City", "name": "Twin Cities", "addressRegion": "MN" },
+  "knowsAbout": ["Wolffia globosa", "Lemna minor", "Oyster mushroom cultivation", "Aquatic plant cultivation", "Bokashi composting", "Household food production"]
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -23,7 +45,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -34,712 +55,364 @@
     overflow-x: hidden;
   }
 
-  /* Organic texture overlay */
   body::before {
     content: '';
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.4;
+    pointer-events: none; z-index: 1000; opacity: 0.4;
   }
 
-  /* NAV */
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+  /* ─── NAV ─── */
   nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
+    position: fixed; top: 0; width: 100%;
     padding: 1.2rem 2.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     z-index: 100;
-    background: rgba(244, 239, 228, 0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(44, 31, 20, 0.08);
+    background: rgba(244,239,228,0.93);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(44,31,20,0.08);
   }
-
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: var(--soil);
-    text-decoration: none;
-    letter-spacing: 0.02em;
-  }
-
-  .nav-logo span {
-    color: var(--duckweed);
-  }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-  }
-
-  nav a {
-    text-decoration: none;
-    color: var(--bark);
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--soil); text-decoration: none; letter-spacing: 0.02em; }
+  .nav-logo span { color: var(--duckweed); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav a { text-decoration: none; color: var(--bark); font-size: 0.85rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
   nav a:hover { color: var(--duckweed); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; flex-direction: column; gap: 5px; }
+  .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--bark); }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 5rem;
-    position: relative;
-    overflow: hidden;
-  }
+  /* ─── BUTTONS ─── */
+  .btn-primary { background: var(--moss); color: var(--cream); padding: 0.9rem 2rem; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; border-radius: 2px; }
+  .btn-primary:hover { background: var(--soil); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--bark); padding: 0.9rem 2rem; border: 1.5px solid var(--bark); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 400; letter-spacing: 0.04em; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; border-radius: 2px; }
+  .btn-secondary:hover { border-color: var(--duckweed); color: var(--duckweed); transform: translateY(-2px); }
 
-  .hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 5rem 3rem 5rem 5rem;
-    position: relative;
-    z-index: 2;
-  }
+  /* ─── HERO ─── */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 55% 45%; padding-top: 5rem; overflow: hidden; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 5rem 3.5rem 5rem 5rem; z-index: 2; }
+  .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--duckweed); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 4vw, 3.8rem); line-height: 1.15; color: var(--soil); margin-bottom: 1.8rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+  .hero h1 em { color: var(--duckweed); font-style: italic; }
+  .hero-sub { font-size: 1.05rem; line-height: 1.8; color: var(--bark); max-width: 480px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
 
-  .hero-eyebrow {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--duckweed);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.2s;
-  }
+  /* ─── HERO RIGHT ─── */
+  .hero-right { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background: linear-gradient(155deg, var(--parchment) 0%, #d4dfc2 60%, #b8c99a 100%); }
 
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 4.5vw, 4.2rem);
-    line-height: 1.15;
-    color: var(--soil);
-    margin-bottom: 1.8rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.4s;
-  }
+  /* Photo mosaic in hero */
+  .hero-mosaic { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 3px; opacity: 0; animation: floatIn 1.2s ease forwards 0.5s; }
+  .hero-mosaic-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-mosaic-img:first-child { grid-column: 1 / 2; grid-row: 1 / 3; }
 
-  .hero h1 em {
-    color: var(--duckweed);
-    font-style: italic;
-  }
+  .hero-tagline { position: absolute; bottom: 2.5rem; left: 2.5rem; right: 2.5rem; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: var(--cream); text-shadow: 0 1px 4px rgba(0,0,0,0.4); opacity: 0; animation: fadeUp 0.8s ease forwards 1.2s; line-height: 1.65; border-left: 2px solid var(--watermeal); padding-left: 1rem; }
 
-  .hero-sub {
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: var(--bark);
-    max-width: 480px;
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.6s;
-  }
+  /* ─── SECTION BASE ─── */
+  section { padding: 6rem 5rem; }
+  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--duckweed); margin-bottom: 1rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem, 3vw, 2.7rem); line-height: 1.2; color: var(--soil); margin-bottom: 1.5rem; }
+  .section-body { font-size: 1rem; line-height: 1.85; color: var(--bark); max-width: 640px; }
 
-  .hero-cta {
-    display: flex;
-    gap: 1rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.8s;
-  }
+  /* ─── CROPS STRIP ─── */
+  .crops-intro { background: var(--soil); color: var(--cream); padding: 4rem 5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; overflow: hidden; }
+  .crops-intro::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 120%, rgba(123,158,78,0.2) 0%, transparent 60%); }
 
-  .btn-primary {
-    background: var(--moss);
-    color: var(--cream);
-    padding: 0.9rem 2rem;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.2s, transform 0.2s;
-    border-radius: 2px;
-  }
+  .crop-item { position: relative; z-index: 1; overflow: hidden; }
+  .crop-item:not(:last-child) { border-right: 1px solid rgba(244,239,228,0.08); }
 
-  .btn-primary:hover {
-    background: var(--soil);
-    transform: translateY(-2px);
-  }
+  .crop-photo { width: 100%; height: 200px; object-fit: cover; display: block; opacity: 0.75; transition: opacity 0.3s; filter: saturate(0.8); }
+  .crop-item:hover .crop-photo { opacity: 0.9; filter: saturate(1); }
 
-  .btn-secondary {
-    background: transparent;
-    color: var(--bark);
-    padding: 0.9rem 2rem;
-    border: 1.5px solid var(--bark);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.2s;
-    border-radius: 2px;
-  }
+  .crop-content { padding: 1.5rem; }
+  .crop-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--watermeal); margin-bottom: 0.2rem; }
+  .crop-latin { font-size: 0.72rem; font-style: italic; color: var(--lichen); letter-spacing: 0.04em; margin-bottom: 0.75rem; opacity: 0.75; }
+  .crop-desc { font-size: 0.88rem; line-height: 1.7; color: var(--lichen); }
 
-  .btn-secondary:hover {
-    border-color: var(--duckweed);
-    color: var(--duckweed);
-    transform: translateY(-2px);
-  }
+  /* ─── AQUATIC NOTE (gentle) ─── */
+  .aquatic-note { background: rgba(196,131,74,0.07); border-left: 2px solid rgba(196,131,74,0.4); padding: 1.5rem 5rem; display: flex; gap: 1.2rem; align-items: flex-start; }
+  .aquatic-note-text { font-size: 0.88rem; line-height: 1.75; color: var(--bark); max-width: 860px; }
+  .aquatic-note-text strong { color: var(--soil); font-weight: 500; }
+  .aquatic-note-icon { font-size: 1.1rem; padding-top: 0.1rem; flex-shrink: 0; opacity: 0.7; }
+  .aquatic-note-rules { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+  .aquatic-note-rule { font-size: 0.73rem; font-weight: 400; letter-spacing: 0.04em; padding: 0.25rem 0.75rem; border-radius: 20px; border: 1px solid rgba(196,131,74,0.25); color: var(--bark); }
 
-  .hero-right {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
+  /* ─── WORKSHOPS ─── */
+  .what { background: var(--parchment); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 
-  .hero-illustration {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 60% 40%, rgba(123,158,78,0.18) 0%, transparent 60%),
-      radial-gradient(ellipse at 30% 70%, rgba(168,192,112,0.12) 0%, transparent 50%),
-      linear-gradient(135deg, var(--parchment) 0%, var(--lichen) 100%);
-  }
+  .track-card { background: var(--cream); border: 1px solid rgba(44,31,20,0.1); border-radius: 4px; padding: 2rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .track-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(44,31,20,0.08); }
+  .track-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--duckweed); }
+  .track-card.mushroom::before { background: var(--accent); }
 
-  .floating-orb {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0;
-    animation: floatIn 1.2s ease forwards;
-  }
+  .track-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--soil); margin-bottom: 0.75rem; }
+  .track-body { font-size: 0.92rem; line-height: 1.8; color: var(--bark); margin-bottom: 0.9rem; }
 
-  .orb-1 {
-    width: 280px; height: 280px;
-    background: radial-gradient(circle at 40% 35%, rgba(168,192,112,0.6), rgba(92,107,58,0.3));
-    top: 15%; left: 10%;
-    animation-delay: 0.5s;
-  }
+  .track-aside { margin-top: 0.5rem; margin-bottom: 1rem; padding: 0.85rem 1rem; background: rgba(123,158,78,0.06); border-left: 2px solid rgba(123,158,78,0.3); border-radius: 0 3px 3px 0; font-size: 0.83rem; line-height: 1.7; color: var(--bark); font-style: italic; }
+  .track-aside.warning { background: rgba(196,131,74,0.06); border-left-color: rgba(196,131,74,0.3); font-style: normal; }
 
-  .orb-2 {
-    width: 180px; height: 180px;
-    background: radial-gradient(circle at 40% 35%, rgba(196,131,74,0.4), rgba(123,158,78,0.2));
-    bottom: 20%; right: 15%;
-    animation-delay: 0.8s;
-  }
+  .track-what-you-get { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss); margin-top: 1.25rem; margin-bottom: 0.6rem; }
+  .track-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.3rem 0.7rem; border-radius: 20px; background: var(--parchment); color: var(--bark); border: 1px solid rgba(44,31,20,0.12); }
 
-  .orb-3 {
-    width: 120px; height: 120px;
-    background: radial-gradient(circle at 40% 35%, rgba(184,196,160,0.7), rgba(138,155,110,0.3));
-    top: 55%; left: 35%;
-    animation-delay: 1s;
-  }
+  .philosophy-note { margin-top: 2rem; padding: 1.5rem; background: var(--cream); border-radius: 3px; border: 1px solid rgba(44,31,20,0.08); font-size: 0.9rem; line-height: 1.75; color: var(--bark); font-style: italic; }
 
-  .hero-tagline {
-    position: absolute;
-    bottom: 3rem;
-    right: 3rem;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--bark);
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 1.2s;
-    text-align: right;
-    line-height: 1.6;
-  }
+  /* ─── PHILOSOPHY ─── */
+  .philosophy { background: var(--soil); color: var(--cream); text-align: center; padding: 7rem 5rem; position: relative; overflow: hidden; }
+  .philosophy::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(123,158,78,0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(196,131,74,0.1) 0%, transparent 50%); }
+  .philosophy .section-label { color: var(--lichen); }
+  .philosophy .section-title { color: var(--cream); max-width: 700px; margin: 0 auto 2rem; }
+  .philosophy .section-body { color: var(--lichen); margin: 0 auto 3rem; max-width: 580px; }
+  .philosophy-stats { display: flex; justify-content: center; gap: 4rem; margin-top: 3rem; position: relative; z-index: 1; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--watermeal); display: block; line-height: 1; margin-bottom: 0.5rem; }
+  .stat-label { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lichen); max-width: 130px; line-height: 1.5; margin: 0 auto; }
 
-  /* SECTION BASE */
-  section {
-    padding: 6rem 5rem;
-  }
+  /* ─── STORY ─── */
+  .story { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: center; background: var(--cream); }
+  .story-pull { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.2vw, 1.85rem); font-style: italic; line-height: 1.55; color: var(--moss); padding: 2.5rem; border-left: 3px solid var(--duckweed); background: var(--parchment); border-radius: 0 4px 4px 0; }
+  .story-credentials { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem; }
+  .credential { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.4rem 0.9rem; border: 1px solid rgba(92,107,58,0.3); border-radius: 20px; color: var(--moss); background: rgba(92,107,58,0.06); }
 
-  .section-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--duckweed);
-    margin-bottom: 1rem;
-  }
+  /* ─── SIGNUP ─── */
+  .signup { background: var(--parchment); text-align: center; padding: 7rem 5rem; }
+  .signup .section-title { max-width: 580px; margin: 0 auto 1rem; }
+  .signup .section-body { margin: 0 auto 2.5rem; max-width: 500px; }
+  .signup-form { display: flex; max-width: 460px; margin: 0 auto; box-shadow: 0 4px 20px rgba(44,31,20,0.1); }
+  .signup-form input { flex: 1; padding: 1rem 1.2rem; border: 1.5px solid rgba(44,31,20,0.15); border-right: none; background: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--soil); outline: none; border-radius: 2px 0 0 2px; }
+  .signup-form input::placeholder { color: rgba(44,31,20,0.35); }
+  .signup-form input:focus { border-color: var(--duckweed); }
+  .signup-form button { padding: 1rem 1.8rem; background: var(--moss); color: var(--cream); border: none; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.05em; cursor: pointer; transition: background 0.2s; border-radius: 0 2px 2px 0; white-space: nowrap; }
+  .signup-form button:hover { background: var(--soil); }
+  .signup-note { font-size: 0.78rem; color: var(--sage); margin-top: 1rem; letter-spacing: 0.03em; }
+  .workshop-detail { display: flex; justify-content: center; gap: 2.5rem; margin-top: 3rem; flex-wrap: wrap; padding-top: 2.5rem; border-top: 1px solid rgba(44,31,20,0.1); }
+  .workshop-fact { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+  .workshop-fact-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); }
+  .workshop-fact-value { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--soil); }
 
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 3vw, 2.8rem);
-    line-height: 1.2;
-    color: var(--soil);
-    margin-bottom: 1.5rem;
-  }
-
-  .section-body {
-    font-size: 1rem;
-    line-height: 1.85;
-    color: var(--bark);
-    max-width: 640px;
-  }
-
-  /* WHAT WE DO */
-  .what {
-    background: var(--parchment);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-
-  .what-left {}
-
-  .what-right {
-    padding-top: 1rem;
-  }
-
-  .track-card {
-    background: var(--cream);
-    border: 1px solid rgba(44,31,20,0.1);
-    border-radius: 4px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .track-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(44,31,20,0.08);
-  }
-
-  .track-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 4px;
-    background: var(--duckweed);
-  }
-
-  .track-card.mushroom::before {
-    background: var(--accent);
-  }
-
-  .track-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: var(--soil);
-    margin-bottom: 0.75rem;
-  }
-
-  .track-body {
-    font-size: 0.92rem;
-    line-height: 1.75;
-    color: var(--bark);
-  }
-
-  .track-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .tag {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.7rem;
-    border-radius: 20px;
-    background: var(--parchment);
-    color: var(--bark);
-    border: 1px solid rgba(44,31,20,0.12);
-  }
-
-  /* PHILOSOPHY */
-  .philosophy {
-    background: var(--soil);
-    color: var(--cream);
-    text-align: center;
-    padding: 7rem 5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .philosophy::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(123,158,78,0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 50%, rgba(196,131,74,0.1) 0%, transparent 50%);
-  }
-
-  .philosophy .section-label {
-    color: var(--lichen);
-  }
-
-  .philosophy .section-title {
-    color: var(--cream);
-    max-width: 700px;
-    margin: 0 auto 2rem;
-  }
-
-  .philosophy .section-body {
-    color: var(--lichen);
-    margin: 0 auto 3rem;
-    max-width: 580px;
-  }
-
-  .philosophy-stats {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    margin-top: 3rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .stat {
-    text-align: center;
-  }
-
-  .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    color: var(--watermeal);
-    display: block;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-
-  .stat-label {
-    font-size: 0.78rem;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--lichen);
-    max-width: 120px;
-    line-height: 1.5;
-  }
-
-  /* STORY */
-  .story {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
-    background: var(--cream);
-  }
-
-  .story-visual {
-    position: relative;
-    height: 420px;
-  }
-
-  .story-block {
-    position: absolute;
-    border-radius: 4px;
-  }
-
-  .story-block-1 {
-    width: 75%;
-    height: 75%;
-    top: 0; left: 0;
-    background: linear-gradient(135deg, var(--moss), var(--duckweed));
-    opacity: 0.85;
-  }
-
-  .story-block-2 {
-    width: 55%;
-    height: 55%;
-    bottom: 0; right: 0;
-    background: linear-gradient(135deg, var(--parchment), var(--lichen));
-    border: 1px solid rgba(44,31,20,0.1);
-  }
-
-  .story-quote {
-    position: absolute;
-    bottom: 2rem;
-    left: 1.5rem;
-    right: 4rem;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--moss);
-    line-height: 1.6;
-    z-index: 2;
-  }
-
-  /* SIGNUP */
-  .signup {
-    background: var(--parchment);
-    text-align: center;
-    padding: 7rem 5rem;
-  }
-
-  .signup .section-title {
-    max-width: 560px;
-    margin: 0 auto 1rem;
-  }
-
-  .signup .section-body {
-    margin: 0 auto 2.5rem;
-    max-width: 480px;
-  }
-
-  .signup-form {
-    display: flex;
-    gap: 0;
-    max-width: 460px;
-    margin: 0 auto;
-    box-shadow: 0 4px 20px rgba(44,31,20,0.1);
-  }
-
-  .signup-form input {
-    flex: 1;
-    padding: 1rem 1.2rem;
-    border: 1.5px solid rgba(44,31,20,0.15);
-    border-right: none;
-    background: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    color: var(--soil);
-    outline: none;
-    border-radius: 2px 0 0 2px;
-  }
-
-  .signup-form input::placeholder {
-    color: rgba(44,31,20,0.35);
-  }
-
-  .signup-form input:focus {
-    border-color: var(--duckweed);
-  }
-
-  .signup-form button {
-    padding: 1rem 1.8rem;
-    background: var(--moss);
-    color: var(--cream);
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: background 0.2s;
-    border-radius: 0 2px 2px 0;
-    white-space: nowrap;
-  }
-
-  .signup-form button:hover {
-    background: var(--soil);
-  }
-
-  .signup-note {
-    font-size: 0.78rem;
-    color: var(--sage);
-    margin-top: 1rem;
-    letter-spacing: 0.03em;
-  }
-
-  /* CONTACT */
-  .contact {
-    background: var(--bark);
-    color: var(--cream);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    padding: 5rem;
-  }
-
+  /* ─── CONTACT ─── */
+  .contact { background: var(--bark); color: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding: 5rem; }
   .contact .section-label { color: var(--lichen); }
   .contact .section-title { color: var(--cream); }
   .contact .section-body { color: var(--lichen); }
-
-  .contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    color: var(--lichen);
-    font-size: 0.92rem;
-    transition: color 0.2s;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(244,239,228,0.1);
-  }
-
+  .contact-links { display: flex; flex-direction: column; margin-top: 2rem; }
+  .contact-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--lichen); font-size: 0.92rem; transition: color 0.2s; padding: 1rem 0; border-bottom: 1px solid rgba(244,239,228,0.1); }
   .contact-link:hover { color: var(--watermeal); }
+  .contact-link-icon { width: 36px; height: 36px; border: 1px solid rgba(244,239,228,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+  .contact-right { background: rgba(244,239,228,0.05); border: 1px solid rgba(244,239,228,0.1); border-radius: 4px; padding: 2.5rem; }
+  .contact-right h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--cream); margin-bottom: 1rem; }
+  .contact-right p { font-size: 0.92rem; line-height: 1.75; color: var(--lichen); margin-bottom: 1.5rem; }
 
-  .contact-link-icon {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(244,239,228,0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    flex-shrink: 0;
-  }
-
-  .contact-right {
-    background: rgba(244,239,228,0.05);
-    border: 1px solid rgba(244,239,228,0.1);
-    border-radius: 4px;
-    padding: 2.5rem;
-  }
-
-  .contact-right h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--cream);
-    margin-bottom: 1rem;
-  }
-
-  .contact-right p {
-    font-size: 0.92rem;
-    line-height: 1.75;
-    color: var(--lichen);
-    margin-bottom: 1.5rem;
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--soil);
-    padding: 2rem 5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(244,239,228,0.08);
-  }
-
+  /* ─── FOOTER ─── */
+  footer { background: var(--soil); padding: 2rem 5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(244,239,228,0.08); flex-wrap: wrap; gap: 1rem; }
   footer .nav-logo { color: var(--cream); }
+  .footer-note { font-size: 0.78rem; color: rgba(244,239,228,0.35); letter-spacing: 0.04em; }
 
-  .footer-note {
-    font-size: 0.78rem;
-    color: rgba(244,239,228,0.35);
-    letter-spacing: 0.04em;
-  }
+  /* Photo credits */
+  .photo-credit { font-size: 0.65rem; color: rgba(244,239,228,0.4); letter-spacing: 0.03em; margin-top: 0.3rem; }
+  .photo-credit a { color: inherit; text-decoration: underline; opacity: 0.7; }
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes floatIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  @keyframes floatIn {
-    from { opacity: 0; transform: scale(0.85); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  /* Scroll reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
+  /* ─── RESPONSIVE ─── */
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-right { height: 300px; }
+    .hero-right { height: 280px; }
     .hero-left { padding: 6rem 2rem 3rem; }
     section { padding: 4rem 2rem; }
     .what, .story, .contact { grid-template-columns: 1fr; gap: 2.5rem; }
-    .philosophy-stats { gap: 2rem; flex-wrap: wrap; }
+    .crops-intro { grid-template-columns: 1fr; padding: 0; }
+    .aquatic-note { padding: 1.5rem 2rem; }
+    .philosophy-stats { gap: 2rem; }
     nav ul { display: none; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; }
-    .signup-form { flex-direction: column; }
+    .nav-toggle { display: flex; }
+    footer { flex-direction: column; text-align: center; }
+    .signup-form { flex-direction: column; box-shadow: none; }
     .signup-form input { border-right: 1.5px solid rgba(44,31,20,0.15); border-bottom: none; border-radius: 2px 2px 0 0; }
     .signup-form button { border-radius: 0 0 2px 2px; }
+    .contact { padding: 4rem 2rem; }
   }
+
+  /* Mobile nav */
+  .mobile-nav { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(244,239,228,0.97); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--soil); text-decoration: none; transition: color 0.2s; }
+  .mobile-nav a:hover { color: var(--duckweed); }
+  .mobile-nav-close { position: absolute; top: 1.5rem; right: 2.5rem; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--bark); }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="#" class="nav-logo">Sprout<span>Space</span></a>
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close navigation">✕</button>
+  <a href="#crops" onclick="closeMobileNav()">The Crops</a>
+  <a href="#workshops" onclick="closeMobileNav()">Workshops</a>
+  <a href="#story" onclick="closeMobileNav()">Our Story</a>
+  <a href="#signup" onclick="closeMobileNav()">Join the List</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+</div>
+
+<nav role="navigation" aria-label="Main navigation">
+  <a href="#" class="nav-logo" aria-label="SproutSpace home">Sprout<span>Space</span></a>
   <ul>
-    <li><a href="#what">What We Grow</a></li>
+    <li><a href="#crops">The Crops</a></li>
+    <li><a href="#workshops">Workshops</a></li>
     <li><a href="#story">Our Story</a></li>
-    <li><a href="#signup">Workshops</a></li>
+    <li><a href="#signup">Join the List</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="nav-toggle" onclick="openMobileNav()" aria-label="Open navigation">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
+<!-- ─── HERO ─── -->
+<header class="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow">Applied Research & Education · Twin Cities, MN</p>
-    <h1>Grow <em>extraordinary</em> food anywhere there is light and water.</h1>
-    <h2>Hands-on workshops in oyster mushroom and aquatic plant cultivation — no soil, no experience, no proprietary systems.</h2>
-    <p class="hero-sub">SproutSpace teaches household-scale cultivation of aquatic superfoods and gourmet mushrooms — no soil, no subscriptions, no backyard required.</p>
+    <p class="hero-eyebrow">Applied Research &amp; Education · Twin Cities, MN</p>
+    <h1>Food was something you grew, understood, <em>and shared.</em></h1>
+    <p class="hero-sub">SproutSpace teaches household-scale cultivation of aquatic superfoods and gourmet mushrooms — crops that thrive on a windowsill, need no soil or prior experience, and belong entirely to the person growing them.</p>
     <div class="hero-cta">
       <a href="#signup" class="btn-primary">Join the Workshop List</a>
-      <a href="#what" class="btn-secondary">Learn More</a>
+      <a href="#crops" class="btn-secondary">Meet the Crops</a>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-illustration"></div>
-    <div class="floating-orb orb-1"></div>
-    <div class="floating-orb orb-2"></div>
-    <div class="floating-orb orb-3"></div>
-    <p class="hero-tagline">Food was something you grew,<br>understood, and shared.</p>
+  <div class="hero-right" aria-hidden="true">
+    <!-- Photo mosaic: Lemna (tall left), oyster mushroom (top right), duckweed mat (bottom right) -->
+    <div class="hero-mosaic">
+      <!-- <img class="hero-mosaic-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Oyster_mushrooms_%28Pleurotus_ostreatus%29.jpg/800px-Oyster_mushrooms_%28Pleurotus_ostreatus%29.jpg"
+           alt="Oyster mushrooms growing in a cluster"
+           onerror="this.style.background='var(--moss)';this.style.opacity='0.5'">
+      <img class="hero-mosaic-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Duckweed_on_surface_%28Unsplash%29.jpg/600px-Duckweed_on_surface_%28Unsplash%29.jpg"
+           alt="Duckweed floating on water surface"
+           onerror="this.style.background='var(--duckweed)';this.style.opacity='0.5'">
+      <img class="hero-mosaic-img"
+           src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/20200823Pleurotus_ostreatus1.jpg/600px-20200823Pleurotus_ostreatus1.jpg"
+           alt="Pleurotus ostreatus oyster mushroom fruiting body"
+           onerror="this.style.background='var(--accent)';this.style.opacity='0.5'"> -->
+    </div>
+    <p class="hero-tagline">No pumps. No proprietary nutrients.<br>No subscription. Just light, water, and curiosity.</p>
   </div>
+</header>
+
+<!-- ─── CROPS ─── -->
+<section class="crops-intro" id="crops" aria-label="The crops we grow">
+
+  <article class="crop-item reveal">
+    <!-- <img class="crop-photo"
+         src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Wolffia_globosa.jpg/800px-Wolffia_globosa.jpg"
+         alt="Wolffia globosa — tiny green spheres of watermeal floating on water"
+         onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Wolffia_arrhiza_sl3.jpg/800px-Wolffia_arrhiza_sl3.jpg';this.onerror=null"> -->
+    <div class="crop-content">
+      <h2 class="crop-name">Wolffia</h2>
+      <p class="crop-latin">Wolffia globosa — Watermeal</p>
+      <p class="crop-desc">The smallest flowering plant on Earth — each one about the size of a grain of sand. Mildly flavored, somewhere between spinach and corn, with a protein density that rivals soybeans. A staple in Thai cuisine for centuries. Almost completely unknown to American home growers, and remarkably easy to grow once you know how.</p>
+    </div>
+  </article>
+
+  <article class="crop-item reveal">
+    <!-- <img class="crop-photo"
+         src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Common_Duckweed_%28Lemna_minor%29.jpg/800px-Common_Duckweed_%28Lemna_minor%29.jpg"
+         alt="Common duckweed (Lemna minor) floating on a pond surface, bright green"
+         onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Lemna_minor_20100812_002.jpg/800px-Lemna_minor_20100812_002.jpg';this.onerror=null"> -->
+    <div class="crop-content">
+      <h2 class="crop-name">Lemna</h2>
+      <p class="crop-latin">Lemna minor — Common Duckweed</p>
+      <p class="crop-desc">A tiny aquatic green with a big reputation — studied by NASA for life-support applications, rich in protein and omega-3s, and capable of doubling in mass every couple of days under good conditions. Each frond is about the size of a lentil, floats freely, and tastes a bit like a mild leafy green. Thrives in a shallow tray on a sunny counter.</p>
+    </div>
+  </article>
+
+  <article class="crop-item reveal">
+    <!-- <img class="crop-photo"
+         src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/20200823Pleurotus_ostreatus1.jpg/800px-20200823Pleurotus_ostreatus1.jpg"
+         alt="Oyster mushrooms (Pleurotus ostreatus) growing in a beautiful pale cluster"
+         onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/2010-10-28_Pleurotus_ostreatus_%28Jacq.%29_P._Kumm_116409_cropped.jpg/800px-2010-10-28_Pleurotus_ostreatus_%28Jacq.%29_P._Kumm_116409_cropped.jpg';this.onerror=null"> -->
+    <div class="crop-content">
+      <h2 class="crop-name">Oyster Mushroom</h2>
+      <p class="crop-latin">Pleurotus ostreatus</p>
+      <p class="crop-desc">A fan-shaped, delicately flavored gourmet mushroom that grows readily on straw, spent coffee grounds, or wood chips — no specialized equipment, no grow tent required. Fruits in as little as two weeks and is one of the most forgiving crops a first-time grower can start with. Delicious roasted, sautéed, or dried, and a genuine gateway to the wider world of fungi.</p>
+    </div>
+  </article>
+
 </section>
 
-<!-- WHAT WE DO -->
-<section class="what" id="what">
+<!-- ─── AQUATIC CULTIVATION NOTE (gentle, informational) ─── -->
+<aside class="aquatic-note reveal" aria-label="A note on growing aquatic plants responsibly">
+  <div class="aquatic-note-icon">🌊</div>
+  <div class="aquatic-note-text">
+    <strong>A note on growing aquatic plants in Minnesota.</strong> Wolffia and Lemna are classified as aquatic invasive species under Minnesota state law — which means they grow enthusiastically, and we take their containment seriously. They cannot be released into natural waterways, storm drains, or outdoor water bodies. Responsible disposal — composting spent cultures, cleaning your system properly — is part of every SproutSpace aquatic workshop, not an afterthought. We think of it the same way we think about any good growing practice: it's just part of knowing your crop.
+    <div class="aquatic-note-rules">
+      <span class="aquatic-note-rule">Never release into waterways or drains</span>
+      <span class="aquatic-note-rule">Compost spent cultures</span>
+      <span class="aquatic-note-rule">Disposal taught in every workshop</span>
+      <span class="aquatic-note-rule">Minnesota AIS regulations apply</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ─── WORKSHOPS ─── -->
+<section class="what" id="workshops" aria-label="Workshop tracks">
   <div class="what-left reveal">
-    <p class="section-label">What We Grow</p>
-    <h2 class="section-title">Two workshop tracks in the Twin Cities</h2>
-    <p class="section-body">Wolffia globosa — the smallest flowering plant on earth — contains more protein per gram than soybeans. Lemna minor is studied by NASA for life support applications. Oyster mushrooms are among the most accessible, high-yield crops available to independent producers. All three remain almost entirely unknown to American home growers. SproutSpace is changing that.</p>
-    <br>
-    <p class="section-body">Every system we teach is low-dependency by design: no pumps, no proprietary nutrients, no subscription inputs. Complexity is only added where it demonstrably improves outcomes.</p>
+    <p class="section-label">Workshop Tracks</p>
+    <h2 class="section-title">Two hands-on tracks. One afternoon. A living system to take home.</h2>
+    <p class="section-body">You learn faster by doing, and you remember more when you leave with something alive. Every SproutSpace workshop is built so a complete beginner can succeed — and every system you build is designed to be understood, fixed, and taught without special tools or hard-to-find materials.</p>
+    <div class="philosophy-note">
+      "No pumps, no proprietary nutrients, no subscription inputs. Complexity only gets added when it demonstrably makes things better."
+    </div>
   </div>
+
   <div class="what-right reveal">
-    <div class="track-card">
+
+    <!-- AQUATIC CARD -->
+    <article class="track-card" aria-label="Aquatic Cultivation workshop">
       <h3 class="track-title">Aquatic Cultivation</h3>
-      <p class="track-body">Simple water-based growing systems for Wolffia and Lemna. Nutrient solutions derived from composting — closing the loop conventional hydroponic systems leave open. Participants leave with a living system, care guide, and the knowledge to teach their neighbor.</p>
-      <div class="track-tags">
-        <span class="tag">No pumps</span>
-        <span class="tag">No mined nutrients</span>
-        <span class="tag">Windowsill-ready</span>
+      <p class="track-body">You'll learn to grow Wolffia and Lemna in a simple tray system. The class covers what these plants actually are, why they grow so fast, what they need (more light than you'd think, less everything else than you'd expect), and how to harvest and use them in the kitchen.</p>
+
+      <p class="track-body">You'll build your own grow tray during the workshop. We cover a range of nutrient approaches — from off-the-shelf hydroponic nutrients to DIY methods that close the loop in a way that feels genuinely satisfying. We'll also cover how to treat city tap water for chloramine, so your plants aren't fighting your water supply from the start.</p>
+
+      <div class="track-aside warning">
+        Wolffia and Lemna are aquatic invasive species in Minnesota. Part of this workshop is learning how to dispose of spent material safely — composting, proper cleanup, the whole thing. It's not complicated, and it's just part of knowing what you're growing.
       </div>
-    </div>
-    <div class="track-card mushroom">
+
+      <p class="track-what-you-get">You leave with:</p>
+      <div class="track-tags">
+        <span class="tag">Living starter culture</span>
+        <span class="tag">Tray grow system</span>
+        <span class="tag">Nutrient solution</span>
+        <span class="tag">Harvest &amp; kitchen guide</span>
+        <span class="tag">Disposal reference</span>
+        <span class="tag">Recipe cards</span>
+      </div>
+    </article>
+
+    <!-- MUSHROOM CARD -->
+    <article class="track-card mushroom" aria-label="Mushroom Cultivation workshop">
       <h3 class="track-title">Mushroom Cultivation</h3>
-      <p class="track-body">Hands-on workshops covering spawn culturing, building a 3-gallon grow bucket to take home, substrate management, sun-charging for Vitamin D2, drying, and preparation. Participants leave with a living grow system, a care guide, and a small recipe book.</p>
+      <p class="track-body">A full introduction to oyster mushrooms, from substrate to your first harvest. You'll culture spawn, build a 3-gallon grow bucket to take home, and learn how to manage substrate, sun-charge for Vitamin D2, dry and store your harvest, and safely identify what you've grown.</p>
+      <p class="track-what-you-get">You leave with:</p>
       <div class="track-tags">
-        <span class="tag">Culture your own spawn</span>
-        <span class="tag">Take home system</span>
-        <span class="tag">Recipe book included</span>
+        <span class="tag">Living 3-gallon grow bucket</span>
+        <span class="tag">Cultured spawn</span>
+        <span class="tag">Care guide</span>
+        <span class="tag">Recipe book</span>
+        <span class="tag">Safety &amp; ID reference</span>
       </div>
-    </div>
+    </article>
+
   </div>
 </section>
 
-<!-- PHILOSOPHY STATS -->
-<section class="philosophy">
+<!-- ─── PHILOSOPHY / STATS ─── -->
+<section class="philosophy" aria-label="Why household-scale food production matters">
   <div style="position:relative;z-index:1;">
     <p class="section-label">Why It Matters</p>
-    <h2 class="section-title reveal">Food security should not require acreage, wealth, or specialized credentials.</h2>
-    <p class="section-body reveal">Nearly 40 million Americans live more than a mile from a grocery store. Over 102 million Americans rent their homes. 72% of people who aren't growing food cite lack of space as the only reason why. SproutSpace is built for them.</p>
+    <h2 class="section-title reveal">Food security shouldn't require a backyard, a budget, or a subscription.</h2>
+    <p class="section-body reveal">SproutSpace doesn't fix the supply chain. It offers something the supply chain can't: a growing system that works anywhere there's light and water, owned entirely by the person tending it.</p>
     <div class="philosophy-stats reveal">
       <div class="stat">
         <span class="stat-number">102M</span>
@@ -747,101 +420,133 @@
       </div>
       <div class="stat">
         <span class="stat-number">72%</span>
-        <span class="stat-label">of non-growers cite space as the barrier</span>
+        <span class="stat-label">of non-growers cite lack of space as the only barrier</span>
       </div>
       <div class="stat">
         <span class="stat-number">40M</span>
-        <span class="stat-label">Americans more than 1 mile from a grocery store</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">$0</span>
-        <span class="stat-label">minimum to get started with open-source guides</span>
+        <span class="stat-label">Americans more than one mile from a grocery store</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STORY -->
-<section class="story" id="story">
-  <div class="story-visual reveal">
-    <div class="story-block story-block-1"></div>
-    <div class="story-block story-block-2"></div>
-    <p class="story-quote">"I had spent years optimizing industrial food systems from the inside. I began asking a different question."</p>
+<!-- ─── STORY ─── -->
+<section class="story" id="story" aria-label="Our story">
+  <div class="reveal">
+    <div class="story-pull">
+      "Our founder spent a decade optimizing industrial food systems from the inside — then left to care for a family member, and started asking a completely different question."
+    </div>
+    <div class="story-credentials">
+      <span class="credential">M.S. Robotics &amp; Autonomous Systems</span>
+      <span class="credential">Precision Agriculture Research</span>
+      <span class="credential">Decade in Industrial Food Systems</span>
+      <span class="credential">B.B.A. Management Information Systems</span>
+    </div>
   </div>
   <div class="reveal">
     <p class="section-label">Our Story</p>
     <h2 class="section-title">Built by an engineer. Grounded in care.</h2>
-    <p class="section-body">SproutSpace grew from a personal reckoning. After leaving a decade-long career in software and agricultural technology — including work with Cargill, one of the world's largest food supply companies — our founder left to care for a family member through injury and cancer treatment.</p>
+    <p class="section-body">SproutSpace grew from a personal reckoning. Our founder's earliest memories involve growing food and sharing it with neighbors — and a career in software development and agricultural systems technology deepened that instinct into expertise. After leaving that career to care for a family member through illness, the abstract became immediate: how quickly time, income, and food quality get tangled up when a household is under stress.</p>
     <br>
-    <p class="section-body">That experience made abstract systems personal. The question wasn't how to optimize the supply chain. It was what meaningful nutrition could look like inside the spatial and financial constraints of an ordinary home, without depending on that chain at all.</p>
+    <p class="section-body">The question wasn't how to optimize the supply chain. It was what real nutrition could look like inside the constraints of an ordinary home — without depending on that chain at all.</p>
     <br>
-    <p class="section-body">The answer was a category of crops largely overlooked by large-scale agriculture, combined with methods simple enough to learn in an afternoon and teach your neighbor the following week.</p>
+    <p class="section-body">The answer was a category of crops largely passed over by large-scale agriculture, paired with methods simple enough to learn in an afternoon and teach your neighbor the following week. SproutSpace applies a background in robotics, precision agriculture, and industrial food systems to the smallest viable unit of resilience: the household.</p>
     <br>
     <a href="#signup" class="btn-primary">Join Our First Workshops</a>
   </div>
 </section>
 
-<!-- SIGNUP -->
-<section class="signup" id="signup">
-  <p class="section-label reveal">Workshops · Twin Cities, MN</p>
-  <h2 class="section-title reveal">Be the first to know.</h2>
-  <p class="section-body reveal">SproutSpace is launching pilot workshops in the Twin Cities beginning in 2026. Join the list to be notified when registration opens.</p>
- <form class="signup-form reveal" onsubmit="submitToMailerLite(event)">
-  <input type="email" id="ml-email" placeholder="your@email.com" required />
-  <button type="submit">Notify Me</button>
- </form>
-  <p class="signup-note reveal">No spam. Just workshops, open-source guides, and the occasional duckweed update.</p>
+<!-- ─── SIGNUP ─── -->
+<section class="signup" id="signup" aria-label="Join the workshop waitlist">
+  <p class="section-label reveal">Workshops · Twin Cities, MN · Launching 2026</p>
+  <h2 class="section-title reveal">Pilot workshops are coming.<br>Be among the first to grow.</h2>
+  <p class="section-body reveal">SproutSpace is launching hands-on pilot workshops in the Twin Cities beginning in 2026! Join the list to hear when registration opens and to get open-source growing guides as they're published.</p>
+  <form class="signup-form reveal" onsubmit="submitToMailerLite(event)" aria-label="Email signup">
+    <label for="ml-email" class="sr-only">Email address</label>
+    <input type="email" id="ml-email" placeholder="your@email.com" required autocomplete="email"/>
+    <button type="submit">Notify Me</button>
+  </form>
+  <p class="signup-note reveal">No spam. Unsubscribe any time. Just workshops, open-source guides, and the occasional duckweed update.</p>
+  <div class="workshop-detail reveal">
+    <div class="workshop-fact">
+      <span class="workshop-fact-label">Format</span>
+      <span class="workshop-fact-value">Hands-on, 3–4 hours</span>
+    </div>
+    <div class="workshop-fact">
+      <span class="workshop-fact-label">Location</span>
+      <span class="workshop-fact-value">Twin Cities, MN</span>
+    </div>
+    <div class="workshop-fact">
+      <span class="workshop-fact-label">Group size</span>
+      <span class="workshop-fact-value">8-10 participants</span>
+    </div>
+    <div class="workshop-fact">
+      <span class="workshop-fact-label">Experience needed</span>
+      <span class="workshop-fact-value">None whatsoever</span>
+    </div>
+    <div class="workshop-fact">
+      <span class="workshop-fact-label">What you take home</span>
+      <span class="workshop-fact-value">A living grow system</span>
+    </div>
+  </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
+<!-- ─── CONTACT ─── -->
+<section class="contact" id="contact" aria-label="Contact SproutSpace">
   <div class="reveal">
     <p class="section-label">Get In Touch</p>
-    <h2 class="section-title">Contact SproutSpace · Twin Cities Workshops</h2>
-    <p class="section-body">Whether you're interested in workshops, institutional programming, school and library partnerships, or just want to know more about the world's smallest flowering plant — we'd love to hear from you.</p>
+    <h2 class="section-title">Workshops, partnerships, or just duckweed.</h2>
+    <p class="section-body">Whether you're interested in attending a workshop, bringing SproutSpace to your school or library, exploring a partnership, or just curious about the world's smallest flowering plant — we'd love to hear from you.</p>
     <div class="contact-links">
       <a href="mailto:alexandra@sproutspace.org" class="contact-link">
-        <span class="contact-link-icon">✉</span>
+        <span class="contact-link-icon" aria-hidden="true">✉</span>
         alexandra@sproutspace.org
       </a>
-      <a href="#" class="contact-link">
-        <span class="contact-link-icon">📍</span>
+      <!-- <a href="https://kind.social/@sproutspace" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <span class="contact-link-icon" aria-hidden="true">🌱</span>
+        Follow on Mastodon
+      </a>
+      <a href="https://www.youtube.com/@SproutSpaceMN" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <span class="contact-link-icon" aria-hidden="true">▶</span>
+        Watch on YouTube
+      </a> -->
+      <span class="contact-link" style="cursor:default;">
+        <span class="contact-link-icon" aria-hidden="true">📍</span>
         Twin Cities, Minnesota
-      </a>
-      <a href="#" class="contact-link">
-        <span class="contact-link-icon">🌱</span>
-        Institutional & School Partnerships Welcome
-      </a>
+      </span>
     </div>
   </div>
   <div class="contact-right reveal">
-    <h3>Interested in hosting a workshop in the Twin Cities?</h3>
-    <p>SproutSpace works with schools, libraries, sustainability organizations, and community groups to bring hands-on cultivation education directly to your community. Programming is designed to be engaging, science-based, and accessible to all ages.</p>
+    <h3>Interested in a workshop or institutional partnership?</h3>
+    <p>SproutSpace works with schools, libraries, sustainability organizations, and community groups to bring hands-on cultivation education into your community. Every session is science-based, accessible for all ages, and genuinely practical — participants always leave with something growing.</p>
     <a href="mailto:alexandra@sproutspace.org" class="btn-primary">Start the Conversation</a>
   </div>
 </section>
 
-<footer>
+<footer role="contentinfo">
   <a href="#" class="nav-logo">Sprout<span style="color:var(--duckweed)">Space</span></a>
-  <p class="footer-note">Applied Research & Education in Household-Scale Food Production · Twin Cities, MN</p>
+  <div>
+    <p class="footer-note">Applied Research &amp; Education in Household-Scale Food Production · Twin Cities, MN</p>
+    <!-- <p class="photo-credit">Photos: <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a> contributors, CC BY-SA. Oyster mushroom © various contributors; Lemna minor © various contributors.</p> -->
+  </div>
 </footer>
 
 <script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12 });
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); document.body.style.overflow = ''; }
 
   function submitToMailerLite(e) {
     e.preventDefault();
     const email = document.getElementById('ml-email').value;
     const button = document.querySelector('.signup-form button');
     const input = document.getElementById('ml-email');
-
+    button.textContent = 'Adding you…';
+    button.disabled = true;
     fetch('https://assets.mailerlite.com/jsonp/2141099/forms/180345020960736917/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -852,7 +557,9 @@
       input.value = '';
       input.placeholder = 'Thanks for signing up!';
     }).catch(function() {
-      button.textContent = 'Something went wrong';
+      button.textContent = 'Try again or email us directly';
+      button.style.background = 'var(--accent)';
+      button.disabled = false;
     });
   }
 </script>
